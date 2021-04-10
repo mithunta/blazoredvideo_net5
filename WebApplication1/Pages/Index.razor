@@ -1,0 +1,50 @@
+﻿@page "/"
+
+
+
+<BlazoredVideo Pla="OnPlay" Pause="OnPause" TimeUpate="OnTimeUpdate" 
+        VideoStateOptions="options"
+        class="w-100"
+        style="max-width:800px;"
+        controls="controls">
+    <source src="https://res.cloudinary.com/blazoredgitter/video/upload/v1557015491/samples/elephants.mp4" type="video/mp4" />
+</BlazoredVideo>
+
+
+
+@code{
+    private string url;
+    public Dictionary<VideoEvents, VideoStateOptions> options = new Dictionary<VideoEvents, VideoStateOptions>();
+
+
+    protected override void OnInitialized()
+    {
+        
+        options[VideoEvents.TimeUpdate] = new VideoStateOptions { CurrentTime = true, CurrentSrc = true, Played=true, Paused=true };
+        options[VideoEvents.Play] = new VideoStateOptions { CurrentTime = true,CurrentSrc = true, Played=true, Paused=true };
+        options[VideoEvents.Pause] = new VideoStateOptions { CurrentTime = true,CurrentSrc = true, Played=true, Paused=true };
+
+        
+        
+    }
+
+    void OnPlay1(VideoState state)
+    {
+        var url = state.CurrentSrc;
+        // do something with this
+    }
+    void OnPause(VideoState state)
+    {
+        url = state.CurrentTime.ToString();
+    }
+    void OnTimeUpdate(VideoState state)
+    {
+        var url = state.CurrentSrc;
+        var currentTime = state.CurrentTime;
+        // do something with this
+    }
+
+    
+}
+
+
