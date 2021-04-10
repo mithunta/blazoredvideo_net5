@@ -10,10 +10,14 @@
     <source src="https://res.cloudinary.com/blazoredgitter/video/upload/v1557015491/samples/elephants.mp4" type="video/mp4" />
 </BlazoredVideo>
 
+<div>
+    Current Time: @time
+</div>
 
 
 @code{
     private string url;
+    private double time;
     public Dictionary<VideoEvents, VideoStateOptions> options = new Dictionary<VideoEvents, VideoStateOptions>();
 
 
@@ -28,14 +32,22 @@
         
     }
 
-    void OnPlay1(VideoState state)
+    void OnPlay(VideoState state)
     {
         var url = state.CurrentSrc;
         // do something with this
     }
     void OnPause(VideoState state)
     {
-        url = state.CurrentTime.ToString();
+        try 
+        {
+            time = state.CurrentTime;
+        }
+        catch(Exception e)
+        {
+            
+        }
+        
     }
     void OnTimeUpdate(VideoState state)
     {
